@@ -46,6 +46,8 @@ jobs:
          ls 
     - name: Copy the WAR file to the Docker build context
       run: cp target/*.war docker/helloworld.war     
+    - name: login to DockerHub
+      run: echo "${{ secrets.DOCKER_HUB_PAT }}" | docker login --username=raknas000 --password-stdin
     - name: Build Docker Image
       uses: docker/build-push-action@v2
       with:
