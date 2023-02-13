@@ -38,6 +38,12 @@ jobs:
       with:
         name: test-results
         path: target/surefire-reports
+    - name: Run multiple Linux commands
+      run: |
+         echo "Current working Directory"
+         pwd
+         echo "Content of current location"
+         ls 
     - name: Build Docker Image
       uses: docker/build-push-action@v2
       with:
