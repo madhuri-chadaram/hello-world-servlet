@@ -22,7 +22,6 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Publish test results
-      uses: actions/upload-artifact@v1
       run: |
         if [ -d target/surefire-reports ]; then
           echo "Directory target/surefire-reports found. Uploading test results as an artifact."
