@@ -38,3 +38,12 @@ jobs:
       with:
         name: test-results
         path: target/surefire-reports
+    - name: Lint Code with Checkstyle
+      run: mvn checkstyle:checkstyle
+    - name: Report Code Coverage with JaCoCo
+      run: mvn jacoco:report
+    - name: Publish Code Coverage Report
+      uses: actions/upload-artifact@v1
+      with:
+        name: code-coverage
+        path: target/site/jacoco     
