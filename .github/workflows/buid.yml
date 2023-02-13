@@ -43,7 +43,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ env.REGISTRY_URL }}/myimage:${{ env.TAG }}
+        tags: ${{ env.REGISTRY_URL }}/helloworldservlet:${{ env.TAG }}
     - name: Log in to Docker Hub
       uses: docker/login-action@v1
       with:
