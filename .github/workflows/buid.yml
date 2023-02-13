@@ -47,7 +47,7 @@ jobs:
     - name: Build Docker Image
       uses: docker/build-push-action@v2
       with:
-        context: $(pwd)/docker
+        context: /home/runner/work/hello-world-servlet/hello-world-servlet/docker
         push: true
         tags: docker.io/raknas000/helloworldservlet:latest
     - name: Log in to Docker Hub
