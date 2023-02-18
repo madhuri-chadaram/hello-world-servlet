@@ -66,7 +66,7 @@ jobs:
            echo ${{ secrets.KUBE_CONFIG }} | base64 --decode > ${HOME}/.kube/config
            cat ${HOME}/.kube/config
       - name: Use context
-        run: kubectl config use-context arn:aws:eks:us-east-2:289349975759:cluster/my-cluster
+        run: kubectl config use-context my-cluster
       - name: Deploy to K8s
         run: kubectl apply -f kubernetes-deploy.yml
 
