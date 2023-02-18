@@ -56,4 +56,4 @@ jobs:
 
       - name: Push Docker image to Amazon ECR
         run: |
-          docker push $AWS_ACCOUNT_ID.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.ECR_REPOSITORY }}
+          docker push 289349975759.dkr.ecr.us-east-2.amazonaws.com/helloworldservlet
