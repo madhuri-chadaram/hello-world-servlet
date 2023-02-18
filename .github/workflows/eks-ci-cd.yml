@@ -62,7 +62,7 @@ jobs:
           docker push 289349975759.dkr.ecr.us-east-2.amazonaws.com/helloworldservlet
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f deployment.yaml
+          kubectl apply -f kubernetes-deploy.yml
           kubectl rollout status deployment/my-app
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
