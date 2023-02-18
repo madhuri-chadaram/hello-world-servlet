@@ -59,7 +59,9 @@ jobs:
 
       - name: Push Docker image to Amazon ECR
         run: |
-          docker push 289349975759.dkr.ecr.us-east-2.amazonaws.com/helloworldservlet
+          docker push 289349975759.dkr.ecr.us-east-2.amazonaws.com/helloworldservlet:latest
+      - name: Update EKS config
+        run: aws eks update-kubeconfig --name my-cluster --region us-east-2   
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f kubernetes-deploy.yml
