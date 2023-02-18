@@ -10,6 +10,9 @@ env:
   AWS_REGION: us-east-2
   ECR_REPOSITORY: helloworldservlet
   IMAGE_TAG: latest
+  EKS_CLUSTER_NAME: my-cluster
+  EKS_NAMESPACE: my-namespace
+  EKS_DEPLOYMENT_NAME: my-deployment
 
 jobs:
   build-and-push:
@@ -57,3 +60,18 @@ jobs:
       - name: Push Docker image to Amazon ECR
         run: |
           docker push 289349975759.dkr.ecr.us-east-2.amazonaws.com/helloworldservlet
+      - name: Install and configure kubectl
+        uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+
+      - name: Deploy Docker image to Amazon EKS
+        env:
+          ECR_REGISTRY: $(echo $(cat ecr-registry.json) | base64 -d | jq -r '.registry')
+          ECR_USERNAME: $(echo $(cat ecr-registry.json) | base64 -d | jq -r '.username')
+          ECR_PASSWORD: $(echo $(cat ecr-registry.json) | base64 -d | jq -r '.password')
+        run: |
+          kubectl set image deployment/${{ env.EKS_DEPLOYMENT_NAME }} ${{ env.EKS_DEPLOYMENT_NAME }}=${ECR_REGISTRY}}/${{ env.ECR_REPOSITORY }}:${{ github.sha }} --namespace=${{ env.EKS_NAMESPACE }}
+        shell: bash        
+          
