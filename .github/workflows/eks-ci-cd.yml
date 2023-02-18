@@ -45,6 +45,7 @@ jobs:
           ECR_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY
           # Tag the Docker image with the ECR repository URI
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_URI:$IMAGE_TAG
+          docker images
           #Display Account ID and ECR URL
           echo "Display Account ID and ECR_URI"
           echo $AWS_ACCOUNT_ID
